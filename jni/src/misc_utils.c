@@ -115,7 +115,7 @@ void is_kanged(void) {
         goto doorprize;
     }
 
-    if (systemv("grep -q '^author=Rem01Gaming$' %s", MODULE_PROP) != 0) [[clang::unlikely]] {
+    if (systemv("grep -q '^author=@VelocityFox22$' %s", MODULE_PROP) != 0) [[clang::unlikely]] {
         goto doorprize;
     }
 
