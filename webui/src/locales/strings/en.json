@@ -1,0 +1,49 @@
+{
+    "common": {
+        "module": "Nusantara Tweaks",
+        "profile": "Current Profile",
+        "kernel": "Kernel",
+        "chipset": "Chipset",
+        "androidSDK": "Android SDK"
+    },
+    "settings": {
+        "title": "Settings",
+        "dnd_gameplay": "DND on Gameplay",
+        "lite_mode": "Lite Mode",
+        "device_mitigation": "Device Mitigation",
+        "default_cpu_gov": "Default CPU Governor",
+        "powersave_cpu_gov": "Powersave CPU Governor"
+    },
+    "actions": {
+        "title": "Actions",
+        "edit_gamelist": "Edit Gamelist",
+        "create_shortcut": "Create WebUI Shortcut",
+        "save_logs": "Save Module Logs"
+    },
+    "support": {
+        "title": "Support Me",
+        "description": "Nusantara Tweaks is, and always will be, free for you, and everyone. You can however show me that you care by making a donation."
+    },
+    "toast": {
+        "reboot_to_apply": "Reboot your device to apply changes.",
+        "has_shortcut": "Shortcut already exists.",
+        "gamelist_save_success": "Gamelist saved successfully."
+    },
+    "modal": {
+        "dnd_title": "Do Not Disturb",
+        "dnd_desc": "Enable do not disturb mode when playing games. Limits interruptions from notifications and calls, allowing you to play your favorite games without any distraction.",
+        "lite_mode_title": "Lite Mode",
+        "lite_mode_desc": "This option will reduces overheating and power consumption during gameplay by allowing CPU and other components to run at lower frequency rather than constantly at the highest frequency, this will affect overall game performance.",
+        "device_mitigation_title": "Device Mitigation",
+        "device_mitigation_desc": "Mitigate some device specific bugs by applying certain adjustments to enhance compatibility and reliability, keep this feature disabled unless your device experiences problems when it is switched off.",
+        "unauthorized_mod_title": "Unauthorized modification detected",
+        "unauthorized_mod_desc": "This module may have been modified by a third party. For your security, please download the official version from the official Nusantara Tweaks website.",
+        "edit_gamelist_title": "Edit Gamelist",
+        "edit_gamelist_desc": "The performance profile will be activated when any of the games and apps listed here are launched.",
+        "save_changes": "Save Changes",
+        "cancel_changes": "Cancel Changes",
+        "save_log_fail": "Unable to save logs",
+        "log_saved_title": "Module Logs Saved",
+        "log_saved_desc": "Logs saved at {0}."
+    }
+}
