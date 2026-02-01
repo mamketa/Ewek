@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include <encore.h>
+#include <nusantara.h>
 
 bool (*get_screenstate)(void) = get_screenstate_normal;
 bool (*get_low_power_state)(void) = get_low_power_state_normal;
@@ -38,8 +38,8 @@ void run_profiler(const int profile) {
     }
 
     write2file(PROFILE_MODE, false, false, "%d\n", profile);
-    if (systemv("encore_profiler %d", profile)) {
-        log_encore(LOG_ERROR, "Unable to execute profiler changes to %d", profile);
+    if (systemv("nusantara_profiler %d", profile)) {
+        log_nusantara(LOG_ERROR, "Unable to execute profiler changes to %d", profile);
     }
 }
 
@@ -80,10 +80,10 @@ bool get_screenstate_normal(void) {
     }
 
     fetch_failed++;
-    log_encore(LOG_ERROR, "Unable to fetch current screenstate");
+    log_nusantara(LOG_ERROR, "Unable to fetch current screenstate");
 
     if (fetch_failed == 6) {
-        log_encore(LOG_FATAL, "get_screenstate is out of order!");
+        log_nusantara(LOG_FATAL, "get_screenstate is out of order!");
 
         // Set default state after too many failures via function pointer
         get_screenstate = return_true;
@@ -119,10 +119,10 @@ bool get_low_power_state_normal(void) {
     }
 
     fetch_failed++;
-    log_encore(LOG_ERROR, "Unable to fetch battery saver status");
+    log_nusantara(LOG_ERROR, "Unable to fetch battery saver status");
 
     if (fetch_failed == 6) {
-        log_encore(LOG_FATAL, "get_low_power_state is out of order!");
+        log_nusantara(LOG_FATAL, "get_low_power_state is out of order!");
 
         // Set default state after too many failures via function pointer
         get_low_power_state = return_false;
