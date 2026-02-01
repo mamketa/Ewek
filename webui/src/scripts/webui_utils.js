@@ -22,7 +22,7 @@ const configPath = '/data/adb/.config/nusantara';
 const modPath = '/data/adb/modules/nusantara';
 const binPath = '/data/adb/modules/nusantara/system/bin';
 const officialWebsite = 'https://xnxx.com/';
-const donateUrl = 'https://t.me/neovelocity;
+const donateUrl = 'https://t.me/neovelocity';
 
 // WebUI X API
 const moduleInterface = window.$nusantara;
