@@ -78,7 +78,7 @@ void GamePreload(const char* package) {
         return;
     }
     pclose(apk);
-    apk_path[strcspn(apk_path, "\n")]  0;
+    apk_path[strcspn(apk_path, "\n")] = 0;
 
     //  EXTRACT APK FOLDER PATH 
     char* last_slash = strrchr(apk_path, '/');
