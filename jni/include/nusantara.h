@@ -23,7 +23,7 @@
 
 #define LOCK_FILE "/data/adb/.config/nusantara/.lock"
 #define LOG_FILE "/data/adb/.config/nusantara/nusantara.log"
-#define LOG_FILE_PRELOAD "/data/adb/.config/nusantara/preload/NPreload.log"
+#define LOG_FILE_PRELOAD "/data/adb/.config/nusantara/preload/preload.log"
 #define PROFILE_MODE "/data/adb/.config/nusantara/current_profile"
 #define GAME_INFO "/data/adb/.config/nusantara/gameinfo"
 #define GAMELIST "/data/adb/.config/nusantara/gamelist.txt"
@@ -83,7 +83,7 @@ bool return_true(void);
 bool return_false(void);
 
 // NPreload
-extern void GamePreload(const char* package)
+extern void GamePreload(const char* package);
 void log_preload(LogLevel level, const char* message, ...);
 
 // Shell and Command execution
