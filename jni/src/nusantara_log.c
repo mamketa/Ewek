@@ -51,39 +51,17 @@ void log_nusantara(LogLevel level, const char* message, ...) {
  *                      to a log file.
  ***********************************************************************************/
 void log_preload(LogLevel level, const char* message, ...) {
-    char val[PROP_VALUE_MAX] = {0};
-    if (__system_property_get("persist.sys.nusantara.debugmode", val) > 0) {
-        if (strcmp(val, "true") == 0) {
-            char* timestamp = timern();
-            char logMesg[MAX_OUTPUT_LENGTH];
-            va_list args;
-            va_start(args, message);
-            vsnprintf(logMesg, sizeof(logMesg), message, args);
-            va_end(args);
+    if (level == LOG_DEBUG && debug_mode == false) return; // SAMA
+    
+    char* timestamp = timern();
+    char logMesg[MAX_OUTPUT_LENGTH];
+    va_list args;
+    va_start(args, message);
+    vsnprintf(logMesg, sizeof(logMesg), message, args);
+    va_end(args);
 
-            // Write to file
-            write2file(LOG_FILE_PRELOAD, true, true, "%s %s %s: %s\n", timestamp, level_str[level], LOG_TAG, logMesg);
-
-            // Also write to logcat
-            int android_log_level;
-            switch (level) {
-            case LOG_INFO:
-                android_log_level = ANDROID_LOG_INFO;
-                break;
-            case LOG_WARN:
-                android_log_level = ANDROID_LOG_WARN;
-                break;
-            case LOG_ERROR:
-                android_log_level = ANDROID_LOG_ERROR;
-                break;
-            default:
-                android_log_level = ANDROID_LOG_DEBUG;
-                break;
-            }
-
-            __android_log_print(android_log_level, LOG_TAG, "%s", logMesg);
-        }
-    }
+    write2file(LOG_FILE_PRELOAD, true, true, "%s %s %s: %s\n", 
+               timestamp, level_str[level], LOG_TAG, logMesg);
 }
 
 /***********************************************************************************
