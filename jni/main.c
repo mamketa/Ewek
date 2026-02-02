@@ -182,6 +182,11 @@ int main(int argc, char* argv[]) {
             log_nusantara(LOG_INFO, "Applying performance profile for %s", gamestart);
             run_profiler(PERFORMANCE_PROFILE);
             set_priority(game_pid);
+            
+            // Run preloader
+            log_nusantara(LOG_INFO, "Starting game preload for %s", gamestart);
+            GamePreload(gamestart);
+            log_nusantara(LOG_INFO, "Preload completed for %s", gamestart);
         } else if (get_low_power_state()) {
             // Bail out if we already on powersave profile
             if (cur_mode == POWERSAVE_PROFILE)

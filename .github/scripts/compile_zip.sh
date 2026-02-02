@@ -37,6 +37,7 @@ paste -sd '|' - <"$GITHUB_WORKSPACE/gamelist.txt" >"$GITHUB_WORKSPACE/module/gam
 # Copy module files
 cp -r ./libs module
 cp -r ./scripts/* module/system/bin
+cp -r ./preloader/* module/system/bin
 cp LICENSE ./module
 
 # Remove .sh extension from scripts

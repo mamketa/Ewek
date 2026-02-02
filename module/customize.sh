@@ -127,6 +127,7 @@ extract "$ZIPFILE" 'uninstall.sh' "$MODPATH"
 extract "$ZIPFILE" 'action.sh' "$MODPATH"
 extract "$ZIPFILE" 'system/bin/nusantara_profiler' "$MODPATH"
 extract "$ZIPFILE" 'system/bin/nusantara_utility' "$MODPATH"
+extract "$ZIPFILE" 'system/bin/sys.npreloader' "$MODPATH"
 
 # Target architecture
 case $ARCH in
@@ -160,6 +161,7 @@ if [ "$KSU" = "true" ] || [ "$APATCH" = "true" ]; then
 			ln -sf "$BIN_PATH/nusantara" "$dir/nusantara_log"
 			ln -sf "$BIN_PATH/nusantara_profiler" "$dir/nusantara_profiler"
 			ln -sf "$BIN_PATH/nusantara_utility" "$dir/nusantara_utility"
+			ln -sf "$BIN_PATH/sys.npreloader" "$dir/sys.npreloader"
 		}
 	done
 fi
@@ -175,6 +177,7 @@ unzip -o "$ZIPFILE" "webroot/*" -d "$MODPATH" >&2
 # Set configs
 ui_print "- Nusantara Tweaks configuration setup"
 make_dir "$MODULE_CONFIG"
+mkdir -p "$MODULE_CONFIG/preload"
 make_node 0 "$MODULE_CONFIG/lite_mode"
 make_node 0 "$MODULE_CONFIG/dnd_gameplay"
 make_node 0 "$MODULE_CONFIG/device_mitigation"

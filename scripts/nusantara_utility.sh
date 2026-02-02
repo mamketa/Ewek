@@ -16,7 +16,7 @@
 #
 
 # Config dir
-MODULE_CONFIG="/data/adb/.config/encore"
+MODULE_CONFIG="/data/adb/.config/nusantara"
 
 change_cpu_gov() {
 	chmod 644 /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
@@ -35,7 +35,7 @@ set_dnd() {
 
 save_logs() {
 	[ ! -d /sdcard/Download ] && mkdir /sdcard/Download
-	log_file="/sdcard/Download/encore_bugreport_$(date +"%Y-%m-%d_%H_%M").txt"
+	log_file="/sdcard/Download/nusantara_bugreport_$(date +"%Y-%m-%d_%H_%M").txt"
 	SOC="Unknown"
 
 	case $(<$MODULE_CONFIG/soc_recognition) in
@@ -44,24 +44,21 @@ save_logs() {
 	3) SOC="Exynos" ;;
 	4) SOC="Unisoc" ;;
 	5) SOC="Tensor" ;;
-	6) SOC="Intel" ;;
-	7) SOC="Tegra" ;;
-	8) SOC="Kirin" ;;
 	esac
 
 	echo "$log_file"
 	cat <<EOF >"$log_file"
 *****************************************************
-Encore Tweaks Log
+Nusantara Tweaks Log
 
-Module Version: $(awk -F'=' '/version=/ {print $2}' /data/adb/modules/encore/module.prop)
+Module Version: $(awk -F'=' '/version=/ {print $2}' /data/adb/modules/nusantara/module.prop)
 Chipset: $SOC $(getprop ro.board.platform)
 Fingerprint: $(getprop ro.build.fingerprint)
 Android SDK: $(getprop ro.build.version.sdk)
 Kernel: $(uname -r -m)
 *****************************************************
 
-$(<$MODULE_CONFIG/encore.log)
+$(<$MODULE_CONFIG/nusantara.log)
 EOF
 }
 
@@ -80,19 +77,16 @@ logcat() {
 	3) SOC="Exynos" ;;
 	4) SOC="Unisoc" ;;
 	5) SOC="Tensor" ;;
-	6) SOC="Intel" ;;
-	7) SOC="Tegra" ;;
-	8) SOC="Kirin" ;;
 	esac
 
 	# Header
 	echo -e "\e[1;36m┌────────────────────────────────────────────┐"
-	echo -e "│          \e[1;37mEncore Tweaks Log Viewer\e[1;36m          │"
+	echo -e "│      \e[1;37mNusantara Tweaks Log Viewer\e[1;36m          │"
 	echo -e "└────────────────────────────────────────────┘\e[0m"
 
 	# Info block
 	echo -e "
-\e[1;32mModule Version:\e[0m $(awk -F'=' '/version=/ {print $2}' /data/adb/modules/encore/module.prop)
+\e[1;32mModule Version:\e[0m $(awk -F'=' '/version=/ {print $2}' /data/adb/modules/nusantara/module.prop)
 \e[1;32mChipset:\e[0m        $SOC $(getprop ro.board.platform)
 \e[1;32mFingerprint:\e[0m    $(getprop ro.build.fingerprint)
 \e[1;32mAndroid SDK:\e[0m    $(getprop ro.build.version.sdk)
@@ -102,7 +96,7 @@ logcat() {
 "
 
 	# Tail log
-	tail -f $MODULE_CONFIG/encore.log | while read -r line; do
+	tail -f $MODULE_CONFIG/nusantara.log | while read -r line; do
 		timestamp="${line:0:23}"
 		level_char=$(echo "$line" | awk '{print $3}')
 		msg="${line:24}"
