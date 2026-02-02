@@ -15,6 +15,8 @@
  */
 
 #include <nusantara.h>
+#include <android/log.h>
+#include <sys/system_properties.h>
 
 char* custom_log_tag = NULL;
 const char* level_str[] = {"D", "I", "W", "E", "F"};
