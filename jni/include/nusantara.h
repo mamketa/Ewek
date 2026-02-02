@@ -33,6 +33,10 @@
 #define MODULE_PROP "/data/adb/modules/nusantara/module.prop"
 #define MODULE_UPDATE "/data/adb/modules/nusantara/update"
 
+#pragma once
+#include <stdbool.h>
+extern bool debug_mode;
+
 #define MY_PATH                                                                                                                    \
     "PATH=/system/bin:/system/xbin:/data/adb/ap/bin:/data/adb/ksu/bin:/data/adb/magisk:/debug_ramdisk:/sbin:/sbin/su:/su/bin:/su/" \
     "xbin:/data/data/com.termux/files/usr/bin"
