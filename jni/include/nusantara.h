@@ -18,6 +18,9 @@
 #define MAX_OUTPUT_LENGTH 256
 #define MAX_PATH_LENGTH 256
 
+#define MAX_LINE 512
+#define MAX_PACKAGE 128
+
 #define NOTIFY_TITLE "Nusantara Tweaks"
 #define LOG_TAG "NusantaraTweaks"
 
