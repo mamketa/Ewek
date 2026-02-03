@@ -61,7 +61,7 @@ void NusantaraPreload(const char* package) {
     }
     log_nusantara(LOG_INFO,
         "Nusantara Preload | Budget %s",
-        mem_total_mb, mem_avail_mb, budget);
+    budget);
 
     /* ================= GET APK PATH ================= */
     char apk_path[256] = {0};

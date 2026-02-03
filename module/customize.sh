@@ -162,9 +162,9 @@ fi
 ui_print "- Extracting webroot"
 unzip -o "$ZIPFILE" "webroot/*" -d "$MODPATH" >&2
 
-ui_print "- Extracting velocity toast..."
+ui_print "- Extracting velocity toast"
 extract "$ZIPFILE" velocitytoast.apk "$MODPATH"
-ui_print "- Installing velocity toast..."
+ui_print "- Installing velocity toast"
 pm install "$MODPATH/velocitytoast.apk" > /dev/null 2>&1
 rm "$MODPATH/velocitytoast.apk"
 
