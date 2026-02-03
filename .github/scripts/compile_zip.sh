@@ -27,7 +27,7 @@ need_integrity=(
 # Version info
 version="$(cat version)"
 version_code="$(git rev-list HEAD --count)"
-release_code="$(git rev-list HEAD --count)-$(git rev-parse --short HEAD)-release"
+release_code="$(git rev-list HEAD --count)-$(git rev-parse --short HEAD)-beta"
 sed -i "s/version=.*/version=$version ($release_code)/" module/module.prop
 sed -i "s/versionCode=.*/versionCode=$version_code/" module/module.prop
 
@@ -44,7 +44,7 @@ cp LICENSE ./module
 find module/system/bin -maxdepth 1 -type f -name "*.sh" -exec sh -c 'mv -- "$0" "${0%.sh}"' {} \;
 
 # Parse version info to module prop
-zipName="nusantara-$version-$release_code.zip"
+zipName="Nusantara-$version-$release_code.zip"
 echo "zipName=$zipName" >>"$GITHUB_OUTPUT"
 
 # Generate sha256sum for integrity checkup

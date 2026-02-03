@@ -1,7 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := nusantara
+LOCAL_MODULE := sys.nusaservice
 LOCAL_SRC_FILES := \
     main.c \
     src/cmd_utils.c \
