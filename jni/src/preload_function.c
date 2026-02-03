@@ -67,7 +67,7 @@ void GamePreload(const char* package) {
     }
 
     log_nusantara(LOG_INFO,
-        "GamePreload | RAM %ldMB | Avail %ldMB | Budget %s",
+        "Nusantara Preload | Budget %s",
         mem_total_mb, mem_avail_mb, budget);
     log_preload(LOG_INFO,
         "Game preload %s | Budget %s",
