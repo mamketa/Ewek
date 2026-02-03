@@ -22,10 +22,7 @@
  * Returns       : void
  * Description   : Dynamically preloads native libraries or split APK contents
  ***********************************************************************************/
-void GamePreload(const char* package) {
-
-    sleep(5);
-
+void NusantaraPreload(const char* package) {
     if (!package || package[0] == '\0') {
         log_nusantara(LOG_WARN, "Package is null or empty");
         return;
@@ -34,7 +31,6 @@ void GamePreload(const char* package) {
     /* ================= DYNAMIC RAM BUDGET ================= */
     long mem_total_mb = 0;
     long mem_avail_mb = 0;
-
     FILE* meminfo = fopen("/proc/meminfo", "r");
     if (meminfo) {
         char line[256];
@@ -47,14 +43,12 @@ void GamePreload(const char* package) {
         }
         fclose(meminfo);
     }
-
     if (mem_total_mb < 4000) {
         log_nusantara(LOG_INFO,
             "GamePreload | RAM %ldMB < 4GB, skipping preload",
             mem_total_mb);
         return;
     }
-
     const char* budget = "350M";
     if (mem_total_mb >= 12000)      budget = "900M";
     else if (mem_total_mb >= 8000)  budget = "700M";
@@ -65,18 +59,13 @@ void GamePreload(const char* package) {
         else if (mem_avail_mb < 1200)
             budget = "350M";
     }
-
     log_nusantara(LOG_INFO,
         "Nusantara Preload | Budget %s",
         mem_total_mb, mem_avail_mb, budget);
-    log_preload(LOG_INFO,
-        "Game preload %s | Budget %s",
-        package, budget);
 
     /* ================= GET APK PATH ================= */
     char apk_path[256] = {0};
     char cmd_apk[512];
-
     snprintf(cmd_apk, sizeof(cmd_apk),
              "cmd package path %s | head -n1 | cut -d: -f2",
              package);
@@ -85,14 +74,11 @@ void GamePreload(const char* package) {
     if (!apk || !fgets(apk_path, sizeof(apk_path), apk)) {
         log_nusantara(LOG_WARN,
             "Failed to get APK path for %s", package);
-        log_preload(LOG_WARN,
-            "Failed to get APK path for %s", package);
         if (apk)
             pclose(apk);
         return;
     }
     pclose(apk);
-
     apk_path[strcspn(apk_path, "\n")] = 0;
 
     /* ================= EXTRACT APK DIR ================= */
@@ -109,14 +95,11 @@ void GamePreload(const char* package) {
         "lib/arm64-v8a",
         "lib/arm64"
     };
-
     char lib_path[300] = {0};
     bool lib_exists = false;
-
     for (int i = 0; i < 2 && !lib_exists; i++) {
         snprintf(lib_path, sizeof(lib_path),
                  "%s/%s", apk_path, abi_list[i]);
-
         DIR* d = opendir(lib_path);
         if (d) {
             struct dirent* e;
@@ -135,9 +118,7 @@ void GamePreload(const char* package) {
     char line[1024];
     int total_pages = 0;
     char last_size[32] = {0};
-
     char preload_cmd[512];
-
     if (lib_exists) {
         snprintf(preload_cmd, sizeof(preload_cmd),
                  "sys.npreloader -v -t -m %s \"%s\"",
@@ -145,9 +126,6 @@ void GamePreload(const char* package) {
 
         log_nusantara(LOG_INFO,
             "Preloading native libs: %s", lib_path);
-        log_preload(LOG_INFO,
-            "Preloading libs: %s | Budget %s",
-            lib_path, budget);
     } else {
         snprintf(preload_cmd, sizeof(preload_cmd),
                  "sys.npreloader -v -t -m %s \"%s\"",
@@ -155,16 +133,10 @@ void GamePreload(const char* package) {
 
         log_nusantara(LOG_INFO,
             "Preloading split APKs: %s", apk_path);
-        log_preload(LOG_INFO,
-            "Preloading split APKs: %s | Budget %s",
-            apk_path, budget);
     }
-
     fp = popen(preload_cmd, "r");
     if (!fp) {
         log_nusantara(LOG_WARN,
-            "Failed to execute preloader for %s", package);
-        log_preload(LOG_WARN,
             "Failed to execute preloader for %s", package);
         return;
     }
@@ -172,16 +144,13 @@ void GamePreload(const char* package) {
     /* ================= PARSE OUTPUT ================= */
     while (fgets(line, sizeof(line), fp)) {
         line[strcspn(line, "\n")] = 0;
-
         char* p = strstr(line, "Touched Pages:");
         if (p) {
             int pages = 0;
             char size[32] = {0};
-
             if (sscanf(p,
                 "Touched Pages: %d (%31[^)])",
                 &pages, size) == 2) {
-
                 total_pages += pages;
                 strncpy(last_size, size,
                         sizeof(last_size) - 1);
@@ -189,16 +158,12 @@ void GamePreload(const char* package) {
                 log_nusantara(LOG_DEBUG,
                     "Preloaded: %d pages (%s)",
                     pages, size);
-                log_preload(LOG_DEBUG,
-                    "Preloaded: %d pages (%s)",
-                    pages, size);
             }
         }
-
         if (strstr(line, ".so") || strstr(line, ".apk") ||
             strstr(line, ".odex") || strstr(line, ".vdex") ||
             strstr(line, ".art") || strstr(line, ".dm")) {
-            log_preload(LOG_DEBUG,
+            log_nusantara(LOG_DEBUG,
                 "Touched: %s", line);
         }
     }
@@ -208,8 +173,5 @@ void GamePreload(const char* package) {
     /* ================= FINAL LOG ================= */
     log_nusantara(LOG_INFO,
         "Game %s preloaded: %d pages (~%s)",
-        package, total_pages, last_size);
-    log_preload(LOG_INFO,
-        "Game %s preload success: %d pages touched (~%s)",
         package, total_pages, last_size);
 }

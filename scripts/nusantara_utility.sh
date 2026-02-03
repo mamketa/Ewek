@@ -16,7 +16,7 @@
 #
 
 # Config dir
-MODULE_CONFIG="/data/adb/.config/nusantara"
+MODULE_CONFIG="/data/adb/.config/Nusantara"
 
 change_cpu_gov() {
 	chmod 644 /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor

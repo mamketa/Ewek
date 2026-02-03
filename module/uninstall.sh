@@ -14,8 +14,8 @@
 # limitations under the License.
 #
 
-rm -rf /data/adb/.config/nusantara
-need_gone="nusantara nusantara_profiler nusantara_utility nusantara_log"
+rm -rf /data/adb/.config/Nusantara
+need_gone="sys.nusaservice nusantara_profiler nusantara_utility nusantara_log"
 manager_paths="/data/adb/ap/bin /data/adb/ksu/bin"
 
 for dir in $manager_paths; do

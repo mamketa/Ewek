@@ -18,7 +18,7 @@ import { exec, toast } from 'kernelsu';
 import nusantaraHappy from '/nusantara_happy.avif';
 import nusantaraSleeping from '/nusantara_sleeping.avif';
 
-const configPath = '/data/adb/.config/nusantara';
+const configPath = '/data/adb/.config/Nusantara';
 const modPath = '/data/adb/modules/nusantara';
 const binPath = '/data/adb/modules/nusantara/system/bin';
 const officialWebsite = 'https://xnxx.com/';

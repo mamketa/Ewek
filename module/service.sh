@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-MODULE_CONFIG="/data/adb/.config/nusantara"
+MODULE_CONFIG="/data/adb/.config/Nusantara"
 CPUFREQ="/sys/devices/system/cpu/cpu0/cpufreq"
 
 # Clear old logs
@@ -58,4 +58,4 @@ if [ -f "$ENABLE_PPM" ]; then
 fi
 
 # Start nusantara Daemon
-nusantara
+sys.nusaservice

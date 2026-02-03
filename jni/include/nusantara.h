@@ -25,14 +25,13 @@
 #define NOTIFY_TITLE "Nusantara Tweaks"
 #define LOG_TAG "NusantaraTweaks"
 
-#define LOCK_FILE "/data/adb/.config/nusantara/.lock"
-#define LOG_FILE "/data/adb/.config/nusantara/nusantara.log"
-#define LOG_FILE_PRELOAD "/data/adb/.config/nusantara/preload/preload.log"
-#define PROFILE_MODE "/data/adb/.config/nusantara/current_profile"
-#define GAME_INFO "/data/adb/.config/nusantara/gameinfo"
-#define GAMELIST "/data/adb/.config/nusantara/gamelist.txt"
-#define MODULE_PROP "/data/adb/modules/nusantara/module.prop"
-#define MODULE_UPDATE "/data/adb/modules/nusantara/update"
+#define LOCK_FILE "/data/adb/.config/Nusantara/.lock"
+#define LOG_FILE "/data/adb/.config/Nusantara/nusantara.log"
+#define PROFILE_MODE "/data/adb/.config/Nusantara/current_profile"
+#define GAME_INFO "/data/adb/.config/Nusantara/gameinfo"
+#define GAMELIST "/data/adb/.config/Nusantara/gamelist.txt"
+#define MODULE_PROP "/data/adb/Nodules/nusantara/module.prop"
+#define MODULE_UPDATE "/data/adb/modules/Nusantara/update"
 
 #define MY_PATH                                                                                                                    \
     "PATH=/system/bin:/system/xbin:/data/adb/ap/bin:/data/adb/ksu/bin:/data/adb/magisk:/debug_ramdisk:/sbin:/sbin/su:/su/bin:/su/" \
@@ -87,8 +86,7 @@ bool return_true(void);
 bool return_false(void);
 
 // NPreload
-extern void GamePreload(const char* package);
-void log_preload(LogLevel level, const char* message, ...);
+extern void NusantaraPreload(const char* package);
 
 // Shell and Command execution
 char* execute_command(const char* format, ...);

@@ -18,7 +18,7 @@
 SKIPUNZIP=1
 SOC=0
 
-MODULE_CONFIG="/data/adb/.config/nusantara"
+MODULE_CONFIG="/data/adb/.config/Nusantara"
 
 make_node() {
 	[ ! -f "$2" ] && echo "$1" >"$2"
@@ -59,12 +59,6 @@ soc_recognition_extra() {
 	[ -d /sys/kernel/ged/hal ] && {
 		SOC=1
 		ui_print "- Implementing tweaks for MediaTek"
-		return 0
-	}
-
-	[ -d /sys/kernel/tegra_gpu ] && {
-		SOC=7
-		ui_print "- Implementing tweaks for Nvidia Tegra"
 		return 0
 	}
 
@@ -140,9 +134,9 @@ case $ARCH in
 esac
 
 # Extract executables
-extract "$ZIPFILE" "libs/$ARCH_TMP/nusantara" "$TMPDIR"
+extract "$ZIPFILE" "libs/$ARCH_TMP/sys.nusaservice" "$TMPDIR"
 cp "$TMPDIR"/libs/"$ARCH_TMP"/* "$MODPATH/system/bin"
-ln -sf "$MODPATH/system/bin/nusantarad" "$MODPATH/system/bin/nusantara_log"
+ln -sf "$MODPATH/system/bin/sys.nusaservice" "$MODPATH/system/bin/nusantara_log"
 rm -rf "$TMPDIR/libs"
 
 if [ "$KSU" = "true" ] || [ "$APATCH" = "true" ]; then
@@ -157,8 +151,8 @@ if [ "$KSU" = "true" ] || [ "$APATCH" = "true" ]; then
 	for dir in $manager_paths; do
 		[ -d "$dir" ] && {
 			ui_print "- Creating symlink in $dir"
-			ln -sf "$BIN_PATH/nusantara" "$dir/nusantara"
-			ln -sf "$BIN_PATH/nusantara" "$dir/nusantara_log"
+			ln -sf "$BIN_PATH/sys.nusaservice" "$dir/sys.nusaservice"
+			ln -sf "$BIN_PATH/sys.nusaservice" "$dir/nusantara_log"
 			ln -sf "$BIN_PATH/nusantara_profiler" "$dir/nusantara_profiler"
 			ln -sf "$BIN_PATH/nusantara_utility" "$dir/nusantara_utility"
 			ln -sf "$BIN_PATH/sys.npreloader" "$dir/sys.npreloader"
@@ -177,7 +171,6 @@ unzip -o "$ZIPFILE" "webroot/*" -d "$MODPATH" >&2
 # Set configs
 ui_print "- Nusantara Tweaks configuration setup"
 make_dir "$MODULE_CONFIG"
-mkdir -p "$MODULE_CONFIG/preload"
 make_node 0 "$MODULE_CONFIG/lite_mode"
 make_node 0 "$MODULE_CONFIG/dnd_gameplay"
 make_node 0 "$MODULE_CONFIG/device_mitigation"

@@ -180,8 +180,8 @@ int main(int argc, char* argv[]) {
             cur_mode = PERFORMANCE_PROFILE;
             need_profile_checkup = false;
             log_nusantara(LOG_INFO, "Applying performance profile for %s", gamestart);
-            GamePreload(gamestart);
             run_profiler(PERFORMANCE_PROFILE);
+            NusantaraPreload(gamestart);
             set_priority(game_pid);
         } else if (get_low_power_state()) {
             // Bail out if we already on powersave profile
