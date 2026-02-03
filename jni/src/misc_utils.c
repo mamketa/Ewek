@@ -66,7 +66,7 @@ void toast(const char* message) {
     );
 
     if (ret != 0) [[clang::unlikely]] {
-        log_zenith(LOG_WARN, "Unable to show toast message: %s", message);
+        log_nusantara(LOG_WARN, "Unable to show toast message: %s", message);
     }
 
     sleep(2);
