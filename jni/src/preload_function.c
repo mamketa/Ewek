@@ -17,7 +17,7 @@
 #include <nusantara.h>
 
 /***********************************************************************************
- * Function Name : GamePreload
+ * Function Name : NusantaraPreload
  * Inputs        : const char* package - target application package name
  * Returns       : void
  * Description   : Dynamically preloads native libraries or split APK contents
@@ -45,7 +45,7 @@ void NusantaraPreload(const char* package) {
     }
     if (mem_total_mb < 4000) {
         log_nusantara(LOG_INFO,
-            "GamePreload | RAM %ldMB < 4GB, skipping preload",
+            "NusantaraPreload | RAM %ldMB < 4GB, skipping preload",
             mem_total_mb);
         return;
     }

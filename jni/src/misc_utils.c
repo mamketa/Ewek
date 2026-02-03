@@ -60,7 +60,7 @@ void toast(const char* message) {
         "su -lp 2000 -c \"/system/bin/am start "
         "-a android.intent.action.MAIN "
         "-e toasttext '%s' "
-        "-n azenith.toast/.MainActivity "
+        "-n velocity.toast/.MainActivity "
         ">/dev/null 2>&1\"",
         message
     );
@@ -70,7 +70,7 @@ void toast(const char* message) {
     }
 
     sleep(2);
-    systemv("am force-stop azenith.toast");
+    systemv("am force-stop velocity.toast");
 }
 
 /***********************************************************************************

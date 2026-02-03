@@ -162,6 +162,12 @@ fi
 ui_print "- Extracting webroot"
 unzip -o "$ZIPFILE" "webroot/*" -d "$MODPATH" >&2
 
+ui_print "- Extracting velocity toast..."
+extract "$ZIPFILE" velocitytoast.apk "$MODPATH"
+ui_print "- Installing velocity toast..."
+pm install "$MODPATH/velocitytoast.apk" > /dev/null 2>&1
+rm "$MODPATH/velocitytoast.apk"
+
 # Mitigate root detection
 [ -d /data/nusantara ] && rm -rf /data/nusantara
 [ -f /data/local/tmp/nusantara_logo.png ] && rm -f /data/local/tmp/nusantara_logo.png

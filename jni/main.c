@@ -179,11 +179,11 @@ int main(int argc, char* argv[]) {
 
             cur_mode = PERFORMANCE_PROFILE;
             need_profile_checkup = false;
-            toast("Applying Performance Profile");
-            log_nusantara(LOG_INFO, "Applying performance profile for %s", gamestart);
+            toast("Applying performance profile");
             run_profiler(PERFORMANCE_PROFILE);
             NusantaraPreload(gamestart);
             set_priority(game_pid);
+            log_nusantara(LOG_INFO, "Applying performance profile for %s", gamestart);
         } else if (get_low_power_state()) {
             // Bail out if we already on powersave profile
             if (cur_mode == POWERSAVE_PROFILE)
@@ -191,9 +191,9 @@ int main(int argc, char* argv[]) {
 
             cur_mode = POWERSAVE_PROFILE;
             need_profile_checkup = false;
-            toast("Applying Powersave Profile");
-            log_nusantara(LOG_INFO, "Applying powersave profile");
+            toast("Applying powersave profile");
             run_profiler(POWERSAVE_PROFILE);
+            log_nusantara(LOG_INFO, "Applying powersave profile");
         } else {
             // Bail out if we already on normal profile
             if (cur_mode == NORMAL_PROFILE)
@@ -201,9 +201,9 @@ int main(int argc, char* argv[]) {
 
             cur_mode = NORMAL_PROFILE;
             need_profile_checkup = false;
-            toast("Applying Normal Profile");
-            log_nusantara(LOG_INFO, "Applying normal profile");
+            toast("Applying normal profile");
             run_profiler(NORMAL_PROFILE);
+            log_nusantara(LOG_INFO, "Applying normal profile");
         }
     }
 
