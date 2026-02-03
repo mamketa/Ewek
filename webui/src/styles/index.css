@@ -78,14 +78,6 @@ h1 {
   color: #ffffff !important;
 }
 
-.bg-secondary-container {
-  background: linear-gradient(
-    180deg,
-    #2c1c12,
-    #1b120b
-  );
-}
-
 select {
   appearance: none;
   border-radius: 10px;
@@ -147,8 +139,6 @@ textarea {
   color: var(--on-surface) !important;
   border: 1px solid color-mix(in srgb, var(--accent-gold) 28%, transparent);
   font-weight: 500;
-  opacity: 1 !important;
-  box-shadow: none;
 }
 
 #edit_gamelist_btn:hover,
@@ -161,10 +151,33 @@ textarea {
   ) !important;
 }
 
-#edit_gamelist_btn:active,
-#create_shortcut_btn:active,
-#save_log_btn:active {
-  transform: scale(0.97);
+#save_gamelist_btn {
+  background: linear-gradient(
+    180deg,
+    #1f1f23,
+    #161619
+  ) !important;
+  color: var(--on-surface) !important;
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 35%, transparent);
+  font-weight: 500;
+}
+
+#save_gamelist_btn:hover {
+  background: linear-gradient(
+    180deg,
+    #26262b,
+    #1a1a1e
+  ) !important;
+}
+
+#edit_gamelist .btn.bg-secondary-container {
+  background: linear-gradient(
+    180deg,
+    #18181c,
+    #121215
+  ) !important;
+  color: var(--on-surface-variant) !important;
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 18%, transparent);
 }
 
 #donate_btn {
