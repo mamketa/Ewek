@@ -23,7 +23,8 @@
   --surface-variant: #1c1c1f;
   --on-surface: #eaeaea;
   --on-surface-variant: #b8b8b8;
-  --primary: #8b1e1e;
+  --primary: #9e2a2a;
+  --primary-strong: #b32626;
   --on-primary: #ffffff;
   --secondary-container: #2a1a10;
   --on-secondary-container: #f1d18a;
@@ -57,23 +58,20 @@ h1 {
 .text-primary {
   color: var(--accent-gold) !important;
 }
-
 .btn {
   border-radius: 12px;
   transition: all 0.25s ease;
 }
-
 .btn.bg-primary {
   background: linear-gradient(
     180deg,
-    #9e2a2a,
+    #b32626,
     #6f1414
   );
   box-shadow:
-    0 4px 14px rgba(139, 30, 30, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 4px 14px rgba(179, 38, 38, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
-
 .btn.bg-primary:hover {
   filter: brightness(1.08);
 }
@@ -90,16 +88,40 @@ select,
 textarea {
   border-radius: 10px;
   background-color: #161618;
+  color: #ffffff;
   box-shadow:
     inset 0 1px 2px rgba(0, 0, 0, 0.8),
     0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
+.peer + div {
+  background-color: #242426 !important;
+  border-color: #3a3a3f !important;
+}
+.peer:checked + div {
+  background: linear-gradient(
+    180deg,
+    #d32f2f,
+    #8b1e1e
+  ) !important;
+  border-color: #ff6b6b !important;
+  box-shadow:
+    0 0 6px rgba(211, 47, 47, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+.peer + div::after {
+  background-color: #bdbdbd !important;
+  border-color: #444 !important;
+}
+.peer:checked + div::after {
+  background-color: #ffffff !important;
+  border-color: #ffd6d6 !important;
+}
 .peer-checked\:bg-primary {
   background: linear-gradient(
     180deg,
-    #9e2a2a,
-    #6f1414
+    #d32f2f,
+    #8b1e1e
   ) !important;
 }
 
@@ -130,6 +152,20 @@ textarea {
     inset 0 1px 0 rgba(255, 215, 128, 0.06);
 }
 
+main {
+  max-width: 420px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (orientation: landscape) {
+  main {
+    max-width: 480px;
+  }
+}
+
 html, body {
   touch-action: pan-x pan-y;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
