@@ -180,6 +180,36 @@ textarea {
   border: 1px solid color-mix(in srgb, var(--accent-gold) 18%, transparent);
 }
 
+#edit_gamelist textarea,
+#edit_gamelist .textarea,
+.modal-box textarea {
+  background: linear-gradient(
+    180deg,
+    #151518,
+    #101012
+  ) !important;
+  color: var(--on-surface) !important;
+
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 28%, transparent) !important;
+
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+#edit_gamelist textarea:focus,
+.modal-box textarea:focus {
+  border-color: var(--accent-gold) !important;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent-gold) 35%, transparent) !important;
+  outline: none !important;
+}
+
+textarea.border-red-500,
+textarea.ring-red-500,
+textarea.focus\:ring-red-500 {
+  border-color: var(--accent-gold) !important;
+  box-shadow: none !important;
+}
+
 #donate_btn {
   background: var(--surface-container);
   border: 1px solid color-mix(in srgb, var(--accent-gold) 25%, transparent);
