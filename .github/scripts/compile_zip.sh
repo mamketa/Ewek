@@ -14,6 +14,7 @@ cd "$GITHUB_WORKSPACE" || {
 
 # Put critical files and folders here
 need_integrity=(
+	"module/velocitytoast.apk"
 	"module/system/bin"
 	"module/libs"
 	"module/META-INF"
