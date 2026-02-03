@@ -23,6 +23,7 @@
  * Description   : Dynamically preloads native libraries or split APK contents
  ***********************************************************************************/
 void NusantaraPreload(const char* package) {
+    sleep(5);
     if (!package || package[0] == '\0') {
         log_nusantara(LOG_WARN, "Package is null or empty");
         return;
@@ -69,7 +70,6 @@ void NusantaraPreload(const char* package) {
     snprintf(cmd_apk, sizeof(cmd_apk),
              "cmd package path %s | head -n1 | cut -d: -f2",
              package);
-
     FILE* apk = popen(cmd_apk, "r");
     if (!apk || !fgets(apk_path, sizeof(apk_path), apk)) {
         log_nusantara(LOG_WARN,
