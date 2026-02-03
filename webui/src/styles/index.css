@@ -62,6 +62,11 @@ h1 {
   border-radius: 12px;
   transition: all 0.2s ease;
   box-shadow: none;
+  color: var(--on-surface);
+}
+
+.btn:active {
+  transform: scale(0.98);
 }
 
 .btn.bg-primary {
@@ -70,15 +75,7 @@ h1 {
     #9e2a2a,
     #6f1414
   );
-  box-shadow: none;
-}
-
-.btn.bg-primary:hover {
-  filter: brightness(1.08);
-}
-
-.btn:active {
-  transform: scale(0.98);
+  color: #ffffff !important;
 }
 
 .bg-secondary-container {
@@ -124,7 +121,6 @@ textarea {
 
 .peer::after {
   background-color: #f5f5f5 !important;
-  border: none !important;
 }
 
 .peer-checked\:bg-primary {
@@ -143,18 +139,38 @@ textarea {
 #edit_gamelist_btn,
 #create_shortcut_btn,
 #save_log_btn {
-  box-shadow: none;
+  background: linear-gradient(
+    180deg,
+    #1f1f23,
+    #161619
+  ) !important;
+  color: var(--on-surface) !important;
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 28%, transparent);
   font-weight: 500;
+  opacity: 1 !important;
+  box-shadow: none;
+}
+
+#edit_gamelist_btn:hover,
+#create_shortcut_btn:hover,
+#save_log_btn:hover {
+  background: linear-gradient(
+    180deg,
+    #26262b,
+    #1a1a1e
+  ) !important;
+}
+
+#edit_gamelist_btn:active,
+#create_shortcut_btn:active,
+#save_log_btn:active {
+  transform: scale(0.97);
 }
 
 #donate_btn {
   background: var(--surface-container);
   border: 1px solid color-mix(in srgb, var(--accent-gold) 25%, transparent);
   box-shadow: none;
-}
-
-#donate_btn:active {
-  background-color: #1e1e22;
 }
 
 .modal-box {
@@ -164,7 +180,8 @@ textarea {
   box-shadow: none;
 }
 
-html, body {
+html,
+body {
   touch-action: pan-x pan-y;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
