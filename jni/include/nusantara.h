@@ -30,8 +30,8 @@
 #define PROFILE_MODE "/data/adb/.config/Nusantara/current_profile"
 #define GAME_INFO "/data/adb/.config/Nusantara/gameinfo"
 #define GAMELIST "/data/adb/.config/Nusantara/gamelist.txt"
-#define MODULE_PROP "/data/adb/Nodules/nusantara/module.prop"
-#define MODULE_UPDATE "/data/adb/modules/Nusantara/update"
+#define MODULE_PROP "/data/adb/modules/nusantara/module.prop"
+#define MODULE_UPDATE "/data/adb/modules/nusantara/update"
 
 #define MY_PATH                                                                                                                    \
     "PATH=/system/bin:/system/xbin:/data/adb/ap/bin:/data/adb/ksu/bin:/data/adb/magisk:/debug_ramdisk:/sbin:/sbin/su:/su/bin:/su/" \
