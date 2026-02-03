@@ -11,7 +11,7 @@
   background: radial-gradient(
     circle at top,
     #1a0b0b 0%,
-    #0e0e0f 45%,
+    #0f0e10 45%,
     #09090a 100%
   );
 }
@@ -20,11 +20,10 @@
   --surface: #0d0d0f;
   --surface-dim: #0a0a0c;
   --surface-container: #141416;
-  --surface-variant: #1c1c1f;
+  --surface-variant: #1e1e22;
   --on-surface: #eaeaea;
-  --on-surface-variant: #b8b8b8;
-  --primary: #9e2a2a;
-  --primary-strong: #b32626;
+  --on-surface-variant: #bdbdbd;
+  --primary: #8b1e1e;
   --on-primary: #ffffff;
   --secondary-container: #2a1a10;
   --on-secondary-container: #f1d18a;
@@ -34,21 +33,13 @@
 
 .card_border {
   border-radius: 14px;
-  border: 1px solid color-mix(in srgb, var(--accent-gold) 18%, transparent);
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255, 215, 128, 0.04),
-      rgba(0, 0, 0, 0.35)
-    ),
-    var(--surface-container);
-  box-shadow:
-    0 6px 18px rgba(0, 0, 0, 0.65),
-    inset 0 1px 0 rgba(255, 215, 128, 0.05);
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 22%, transparent);
+  background: var(--surface-container);
+  box-shadow: none;
 }
 
 h1, h2, h3 {
-  letter-spacing: 0.2px;
+  letter-spacing: 0.3px;
 }
 
 h1 {
@@ -58,110 +49,119 @@ h1 {
 .text-primary {
   color: var(--accent-gold) !important;
 }
+
+.text-on-surface {
+  color: var(--on-surface);
+}
+
+.text-on-surface-variant {
+  color: var(--on-surface-variant);
+}
+
 .btn {
   border-radius: 12px;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
+  box-shadow: none;
 }
+
 .btn.bg-primary {
   background: linear-gradient(
     180deg,
-    #b32626,
+    #9e2a2a,
     #6f1414
   );
-  box-shadow:
-    0 4px 14px rgba(179, 38, 38, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  box-shadow: none;
 }
+
 .btn.bg-primary:hover {
   filter: brightness(1.08);
+}
+
+.btn:active {
+  transform: scale(0.98);
 }
 
 .bg-secondary-container {
   background: linear-gradient(
     180deg,
-    #2e1d12,
-    #1a120b
+    #2c1c12,
+    #1b120b
   );
 }
 
-select,
-textarea {
+select {
+  appearance: none;
   border-radius: 10px;
-  background-color: #161618;
-  color: #ffffff;
-  box-shadow:
-    inset 0 1px 2px rgba(0, 0, 0, 0.8),
-    0 2px 6px rgba(0, 0, 0, 0.4);
+  background-color: #1c1c20 !important;
+  color: #f2e6c9 !important;
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 35%, transparent);
+  box-shadow: none;
 }
 
-.peer + div {
-  background-color: #242426 !important;
-  border-color: #3a3a3f !important;
+select option {
+  background-color: #141416;
+  color: #f2e6c9;
 }
-.peer:checked + div {
-  background: linear-gradient(
-    180deg,
-    #d32f2f,
-    #8b1e1e
-  ) !important;
-  border-color: #ff6b6b !important;
-  box-shadow:
-    0 0 6px rgba(211, 47, 47, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+select:focus {
+  outline: none;
+  border-color: var(--accent-gold);
 }
-.peer + div::after {
-  background-color: #bdbdbd !important;
-  border-color: #444 !important;
+
+textarea {
+  border-radius: 10px;
+  background-color: #121214;
+  color: var(--on-surface);
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 30%, transparent);
+  box-shadow: none;
 }
-.peer:checked + div::after {
-  background-color: #ffffff !important;
-  border-color: #ffd6d6 !important;
+
+.peer {
+  background-color: #2a2a2e !important;
+  border: 1px solid #3f3f45;
+  box-shadow: none !important;
 }
+
+.peer::after {
+  background-color: #f5f5f5 !important;
+  border: none !important;
+}
+
 .peer-checked\:bg-primary {
   background: linear-gradient(
     180deg,
-    #d32f2f,
-    #8b1e1e
+    #ffcc70,
+    #d4af37
   ) !important;
+  border-color: #d4af37 !important;
+}
+
+.peer-checked\:after\:bg-on-primary::after {
+  background-color: #1a1414 !important;
+}
+
+#edit_gamelist_btn,
+#create_shortcut_btn,
+#save_log_btn {
+  box-shadow: none;
+  font-weight: 500;
 }
 
 #donate_btn {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(212, 175, 55, 0.06),
-      rgba(0, 0, 0, 0.35)
-    ),
-    var(--surface-container);
+  background: var(--surface-container);
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 25%, transparent);
+  box-shadow: none;
 }
 
 #donate_btn:active {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(212, 175, 55, 0.12),
-      rgba(0, 0, 0, 0.45)
-    );
+  background-color: #1e1e22;
 }
 
 .modal-box {
   border-radius: 16px;
-  border: 1px solid color-mix(in srgb, var(--accent-gold) 22%, transparent);
-  box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.75),
-    inset 0 1px 0 rgba(255, 215, 128, 0.06);
-}
-
-main {
-  max-width: 420px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-@media (orientation: landscape) {
-  main {
-    max-width: 480px;
-  }
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 25%, transparent);
+  background: var(--surface-container);
+  box-shadow: none;
 }
 
 html, body {
