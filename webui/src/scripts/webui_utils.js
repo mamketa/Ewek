@@ -21,8 +21,8 @@ import nusantaraSleeping from '/nusantara_sleeping.avif';
 const configPath = '/data/adb/.config/Nusantara';
 const modPath = '/data/adb/modules/nusantara';
 const binPath = '/data/adb/modules/nusantara/system/bin';
-const officialWebsite = 'https://xnxx.com/';
-const donateUrl = 'https://t.me/neovelocity';
+const officialWebsite = 'https://t.me/Neovelocity';
+const donateUrl = 'https://t.me/Neovelocity/232';
 
 // WebUI X API
 const moduleInterface = window.$nusantara;

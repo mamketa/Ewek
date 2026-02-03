@@ -8,8 +8,124 @@
 .root_layout {
   padding-top: var(--window-inset-top, 0px);
   padding-bottom: var(--window-inset-bottom, 0px);
+  background: radial-gradient(
+    circle at top,
+    #1a0b0b 0%,
+    #0e0e0f 45%,
+    #09090a 100%
+  );
+}
+
+:root {
+  --surface: #0d0d0f;
+  --surface-dim: #0a0a0c;
+  --surface-container: #141416;
+  --surface-variant: #1c1c1f;
+  --on-surface: #eaeaea;
+  --on-surface-variant: #b8b8b8;
+  --primary: #8b1e1e;
+  --on-primary: #ffffff;
+  --secondary-container: #2a1a10;
+  --on-secondary-container: #f1d18a;
+  --accent-gold: #d4af37;
+  --outline: #3a3a3f;
 }
 
 .card_border {
-  border: 1px solid color-mix(in srgb, var(--outline) 12%, transparent);
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 18%, transparent);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 215, 128, 0.04),
+      rgba(0, 0, 0, 0.35)
+    ),
+    var(--surface-container);
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 215, 128, 0.05);
+}
+
+h1, h2, h3 {
+  letter-spacing: 0.2px;
+}
+
+h1 {
+  color: var(--accent-gold);
+}
+
+.text-primary {
+  color: var(--accent-gold) !important;
+}
+
+.btn {
+  border-radius: 12px;
+  transition: all 0.25s ease;
+}
+
+.btn.bg-primary {
+  background: linear-gradient(
+    180deg,
+    #9e2a2a,
+    #6f1414
+  );
+  box-shadow:
+    0 4px 14px rgba(139, 30, 30, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.btn.bg-primary:hover {
+  filter: brightness(1.08);
+}
+
+.bg-secondary-container {
+  background: linear-gradient(
+    180deg,
+    #2e1d12,
+    #1a120b
+  );
+}
+
+select,
+textarea {
+  border-radius: 10px;
+  background-color: #161618;
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.8),
+    0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.peer-checked\:bg-primary {
+  background: linear-gradient(
+    180deg,
+    #9e2a2a,
+    #6f1414
+  ) !important;
+}
+
+#donate_btn {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(212, 175, 55, 0.06),
+      rgba(0, 0, 0, 0.35)
+    ),
+    var(--surface-container);
+}
+
+#donate_btn:active {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(212, 175, 55, 0.12),
+      rgba(0, 0, 0, 0.45)
+    );
+}
+
+.modal-box {
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--accent-gold) 22%, transparent);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 rgba(255, 215, 128, 0.06);
 }
