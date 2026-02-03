@@ -173,15 +173,6 @@ const getChipset = async () => {
     case "5":
       brand = "Tensor";
       break;
-    case "6":
-      brand = "Intel";
-      break;
-    case "7":
-      brand = "Tegra";
-      break;
-    case "8":
-      brand = "Kirin";
-      break;
     default:
       brand = "Unknown";
       break;
@@ -212,7 +203,7 @@ const getServiceState = async () => {
   const image = document.getElementById('nusantara_logo');
   const pidElement = document.getElementById('daemon_pid');
 
-  const pid = await runCommand('/system/bin/toybox pidof nusantara || echo null');
+  const pid = await runCommand('/system/bin/toybox pidof sys.nusaservice || echo null');
   pidElement.textContent = `Daemon PID: ${pid}`;
 
   if (pid === "null") {
