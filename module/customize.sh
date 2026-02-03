@@ -98,9 +98,6 @@ recognize_soc() {
 	3) ui_print "- Implementing tweaks for Exynos" ;;
 	4) ui_print "- Implementing tweaks for Unisoc" ;;
 	5) ui_print "- Implementing tweaks for Google Tensor" ;;
-	6) ui_print "- Implementing tweaks for Intel" ;;
-	7) ui_print "- Implementing tweaks for Nvidia Tegra" ;;
-	8) ui_print "- Implementing tweaks for Kirin" ;;
 	0) return 1 ;;
 	esac
 }

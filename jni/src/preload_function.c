@@ -172,6 +172,6 @@ void NusantaraPreload(const char* package) {
 
     /* ================= FINAL LOG ================= */
     log_nusantara(LOG_INFO,
-        "Game %s preloaded: %d pages (~%s)",
+        "Application %s preloaded: %d pages (~%s)",
         package, total_pages, last_size);
 }
