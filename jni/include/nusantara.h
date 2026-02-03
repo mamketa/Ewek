@@ -45,7 +45,6 @@
 #define IS_LOW_POWER(state) (strcmp(state, "true") == 0 || strcmp(state, "1") == 0)
 
 // Basic C knowledge: enum starts with 0
-
 typedef enum : char {
     LOG_DEBUG,
     LOG_INFO,
@@ -71,15 +70,11 @@ extern char* gamestart;
 extern char* custom_log_tag;
 extern pid_t game_pid;
 
-/*
- * If you're here for function comments, you
- * are in the wrong place.
- */
-
 // Misc Utilities
 void sighandler(const int signal);
 char* trim_newline(char* string);
 void notify(const char* message);
+void toast(const char* message);
 void is_kanged(void);
 char* timern(void);
 bool return_true(void);

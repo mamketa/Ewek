@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2024-2025 Rem01Gaming
+# Copyright (C) 2025-2026 VelocityFox22
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -90,8 +90,6 @@ recognize_soc() {
 	*exynos* | *Exynos* | *EXYNOS* | *universal* | *samsung* | *erd* | *s5e*) SOC=3 ;;
 	*Unisoc* | *unisoc* | *ums*) SOC=4 ;;
 	*gs* | *Tensor* | *tensor*) SOC=5 ;;
-	*Intel* | *intel*) SOC=6 ;;
-	*kirin*) SOC=8 ;;
 	esac
 
 	case "$SOC" in
@@ -187,9 +185,6 @@ set_perm_recursive "$MODPATH/system/bin" 0 0 0755 0755
 # 3 = Exynos
 # 4 = Unisoc
 # 5 = Google Tensor
-# 6 = Intel
-# 7 = Nvidia Tegra
-# 8 = Kirin
 
 # Recognize Chipset
 soc_recognition_extra

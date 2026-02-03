@@ -179,6 +179,7 @@ int main(int argc, char* argv[]) {
 
             cur_mode = PERFORMANCE_PROFILE;
             need_profile_checkup = false;
+            toast("Applying Performance Profile");
             log_nusantara(LOG_INFO, "Applying performance profile for %s", gamestart);
             run_profiler(PERFORMANCE_PROFILE);
             NusantaraPreload(gamestart);
@@ -190,6 +191,7 @@ int main(int argc, char* argv[]) {
 
             cur_mode = POWERSAVE_PROFILE;
             need_profile_checkup = false;
+            toast("Applying Powersave Profile");
             log_nusantara(LOG_INFO, "Applying powersave profile");
             run_profiler(POWERSAVE_PROFILE);
         } else {
@@ -199,6 +201,7 @@ int main(int argc, char* argv[]) {
 
             cur_mode = NORMAL_PROFILE;
             need_profile_checkup = false;
+            toast("Applying Normal Profile");
             log_nusantara(LOG_INFO, "Applying normal profile");
             run_profiler(NORMAL_PROFILE);
         }

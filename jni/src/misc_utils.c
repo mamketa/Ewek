@@ -50,6 +50,30 @@ void notify(const char* message) {
 }
 
 /***********************************************************************************
+ * Function Name      : toast
+ * Inputs             : message (const char *) - Message to display
+ * Returns            : None
+ * Description        : Display a toast notification using bellavita.toast app.
+ ***********************************************************************************/
+void toast(const char* message) {
+    int ret = systemv(
+        "su -lp 2000 -c \"/system/bin/am start "
+        "-a android.intent.action.MAIN "
+        "-e toasttext '%s' "
+        "-n azenith.toast/.MainActivity "
+        ">/dev/null 2>&1\"",
+        message
+    );
+
+    if (ret != 0) [[clang::unlikely]] {
+        log_zenith(LOG_WARN, "Unable to show toast message: %s", message);
+    }
+
+    sleep(2);
+    systemv("am force-stop azenith.toast");
+}
+
+/***********************************************************************************
  * Function Name      : timern
  * Inputs             : None
  * Returns            : char * - pointer to a statically allocated string
