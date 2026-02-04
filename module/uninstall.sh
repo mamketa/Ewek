@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+pm uninstall --user 0 velocity.toast
 rm -rf /data/adb/.config/Nusantara
 need_gone="sys.nusaservice nusantara_profiler nusantara_utility nusantara_log"
 manager_paths="/data/adb/ap/bin /data/adb/ksu/bin"
