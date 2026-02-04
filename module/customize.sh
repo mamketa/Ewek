@@ -143,6 +143,7 @@ extract "$ZIPFILE" 'action.sh' "$MODPATH"
 extract "$ZIPFILE" 'system/bin/nusantara_profiler' "$MODPATH"
 extract "$ZIPFILE" 'system/bin/nusantara_utility' "$MODPATH"
 extract "$ZIPFILE" 'system/bin/sys.npreloader' "$MODPATH"
+extract "$ZIPFILE" velocity.banner.avif "$MODPATH"
 
 # Extract Architecture Binaries
 extract "$ZIPFILE" "libs/$ARCH_TMP/sys.nusaservice" "$TMPDIR"
