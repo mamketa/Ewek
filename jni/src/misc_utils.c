@@ -53,7 +53,7 @@ void notify(const char* message) {
  * Function Name      : toast
  * Inputs             : message (const char *) - Message to display
  * Returns            : None
- * Description        : Display a toast notification using bellavita.toast app.
+ * Description        : Display a toast notification using velocity.toast app.
  ***********************************************************************************/
 void toast(const char* message) {
     int ret = systemv(

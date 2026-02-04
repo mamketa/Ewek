@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2024-2025 Rem01Gaming
+# Copyright (C) 2025-2026 VelocityFox22
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,27 +13,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 if [ -n "$MMRL" ]; then
-	echo "- This action script is NOT intended to run on MMRL..."
-	echo "- Please open Encore Tweaks WebUI by clicking the module card."
+	echo "- This script isn’t meant to be run from MMRL."
+	echo "- Please open the Nusantara Tweaks WebUI via the module card."
 	exit 0
 fi
 
 if [ -n "$MAGISKTMP" ]; then
 	pm path io.github.a13e300.ksuwebui >/dev/null 2>&1 && {
-		echo "- Launching WebUI in KSUWebUIStandalone..."
-		am start -n "io.github.a13e300.ksuwebui/.WebUIActivity" -e id "encore"
+		echo "- Opening WebUI using KSU WebUI Standalone..."
+		am start -n "io.github.a13e300.ksuwebui/.WebUIActivity" -e id "nusantara"
 		exit 0
 	}
 	pm path com.dergoogler.mmrl.webuix >/dev/null 2>&1 && {
-		echo "- Launching WebUI in WebUI X..."
-		am start -n "com.dergoogler.mmrl.webuix/.ui.activity.webui.WebUIActivity" -e MOD_ID "encore"
+		echo "- Opening WebUI using WebUI X..."
+		am start -n "com.dergoogler.mmrl.webuix/.ui.activity.webui.WebUIActivity" -e MOD_ID "nusantara"
 		exit 0
 	}
 fi
 
-echo "! Install KsuWebUI for WebUI access"
+echo "! WebUI not found."
+echo "! Please install KSU WebUI to access the interface."
 sleep 2
 am start -a android.intent.action.VIEW -d https://github.com/5ec1cff/KsuWebUIStandalone/releases
 exit 0

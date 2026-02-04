@@ -57,19 +57,19 @@ abort_corrupted() {
 soc_recognition_extra() {
 	[ -d /sys/class/kgsl/kgsl-3d0/devfreq ] && {
 		SOC=2
-		ui_print "- Snapdragon platform detected"
+		ui_print "- Implementing tweaks for Snapdragon"
 		return 0
 	}
 
 	[ -d /sys/devices/platform/kgsl-2d0.0/kgsl ] && {
 		SOC=2
-		ui_print "- Snapdragon platform detected"
+		ui_print "- Implementing tweaks for Snapdragon"
 		return 0
 	}
 
 	[ -d /sys/kernel/ged/hal ] && {
 		SOC=1
-		ui_print "- MediaTek platform detected"
+		ui_print "- Implementing tweaks for MediaTek"
 		return 0
 	}
 
@@ -103,11 +103,11 @@ recognize_soc() {
 	esac
 
 	case "$SOC" in
-	1) ui_print "- Applying MediaTek-specific tweaks" ;;
-	2) ui_print "- Applying Snapdragon-specific tweaks" ;;
-	3) ui_print "- Applying Exynos-specific tweaks" ;;
-	4) ui_print "- Applying Unisoc-specific tweaks" ;;
-	5) ui_print "- Applying Google Tensor-specific tweaks" ;;
+	1) ui_print "- Implementing tweaks for MediaTek" ;;
+	2) ui_print "- Implementing tweaks for Snapdragon" ;;
+	3) ui_print "- Implementing tweaks for Exynos" ;;
+	4) ui_print "- Implementing tweaks for Unisoc" ;;
+	5) ui_print "- Implementing tweaks for Google Tensor" ;;
 	0) return 1 ;;
 	esac
 }
@@ -152,16 +152,17 @@ rm -rf "$TMPDIR/libs"
 
 # KernelSU / APatch Handling
 if [ "$KSU" = "true" ] || [ "$APATCH" = "true" ]; then
+	# remove action on APatch / KernelSU
 	rm "$MODPATH/action.sh"
+	# skip mount on APatch / KernelSU
 	touch "$MODPATH/skip_mount"
-	ui_print "- KernelSU / APatch detected, using dynamic binary linking"
-
+	ui_print "- KSU/AP Detected, skipping module mount"
+    # symlink ourselves on $PATH
 	manager_paths="/data/adb/ap/bin /data/adb/ksu/bin"
 	BIN_PATH="/data/adb/modules/nusantara/system/bin"
-
 	for dir in $manager_paths; do
 		[ -d "$dir" ] && {
-			ui_print "- Linking binaries into $dir"
+			ui_print "- Creating symlink in $dir"
 			ln -sf "$BIN_PATH/sys.nusaservice" "$dir/sys.nusaservice"
 			ln -sf "$BIN_PATH/sys.nusaservice" "$dir/nusantara_log"
 			ln -sf "$BIN_PATH/nusantara_profiler" "$dir/nusantara_profiler"
@@ -186,7 +187,7 @@ rm "$MODPATH/velocitytoast.apk"
 [ -f /data/local/tmp/nusantara_logo.png ] && rm -f /data/local/tmp/nusantara_logo.png
 
 # Configuration Setup
-ui_print "- Initializing Nusantara configuration"
+ui_print "- Nusantara configuration setup"
 make_dir "$MODULE_CONFIG"
 make_node 0 "$MODULE_CONFIG/lite_mode"
 make_node 0 "$MODULE_CONFIG/dnd_gameplay"
@@ -195,7 +196,7 @@ make_node 0 "$MODULE_CONFIG/device_mitigation"
 [ ! -f "$MODULE_CONFIG/gamelist.txt" ] && extract "$ZIPFILE" 'gamelist.txt' "$MODULE_CONFIG"
 
 # Permissions
-ui_print "- Applying permissions"
+ui_print "- Permissions setup"
 set_perm_recursive "$MODPATH/system/bin" 0 0 0755 0755
 
 # SoC Recognition
@@ -203,23 +204,22 @@ soc_recognition_extra
 [ $SOC -eq 0 ] && recognize_soc "$(get_soc_getprop)"
 [ $SOC -eq 0 ] && recognize_soc "$(grep -E "Hardware|Processor" /proc/cpuinfo | uniq | cut -d ':' -f 2 | sed 's/^[ \t]*//')"
 [ $SOC -eq 0 ] && recognize_soc "$(grep "model\sname" /proc/cpuinfo | uniq | cut -d ':' -f 2 | sed 's/^[ \t]*//')"
-
 [ $SOC -eq 0 ] && {
-	ui_print "! Unable to determine SoC"
-	ui_print "! Some platform-specific optimizations will be skipped"
+	ui_print "! Unknown SoC, skipping some tweaks"
+	ui_print "! If you think this is wrong, please report to maintainer"
 }
 
 echo $SOC >"$MODULE_CONFIG/soc_recognition"
 
 # Nusantara Easter Egg
 case "$((RANDOM % 9 + 1))" in
-1) ui_print "- Have you ever explored Nusantara beyond the map?" ;;
-2) ui_print "- Do you know how many cultures live inside Nusantara?" ;;
-3) ui_print "- Nusantara is not just land, it's legacy." ;;
-4) ui_print "- From Sabang to Merauke, performance matters." ;;
-5) ui_print "- Ready to unlock the true spirit of Nusantara?" ;;
-6) ui_print "- Diversity is strength, optimization is power." ;;
-7) ui_print "- Nusantara asks: are you ready to go further?" ;;
-8) ui_print "- Strong device, strong roots, strong Nusantara." ;;
-9) ui_print "- Wen Donate?" ;;
+1) ui_print "- Slow progress is still progress." ;;
+2) ui_print "- Tough day? That’s okay." ;;
+3) ui_print "- Feeling tired means you’re moving." ;;
+4) ui_print "- Little by little, keep going." ;;
+5) ui_print "- Not every day has to be perfect." ;;
+6) ui_print "- Resting is part of the journey." ;;
+7) ui_print "- Ordinary days still matter." ;;
+8) ui_print "- Nusantara still has many stories." ;;
+9) ui_print "- Wen donate? 🗿" ;;
 esac
