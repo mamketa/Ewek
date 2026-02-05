@@ -26,7 +26,7 @@ int is_file_empty(const char *filename) {
         perror("fopen failed");
         return -1;
     }
-
+    
     int ch = fgetc(file);
     if (ch == EOF) {
         if (feof(file)) {
@@ -38,17 +38,19 @@ int is_file_empty(const char *filename) {
             return -1;
         }
     }
-
+    
     fclose(file);
     return 0;
 }
 
 int main(int argc, char* argv[]) {
+    // Handle case when not running on root
     if (getuid() != 0) {
         fprintf(stderr, "\033[31mERROR:\033[0m Please run this program as root\n");
         exit(EXIT_FAILURE);
     }
 
+    // Expose logging interface for other modules
     char* base_name = basename(argv[0]);
     if (strcmp(base_name, "nusantara_log") == 0) {
         if (argc < 3) {
@@ -57,15 +59,18 @@ int main(int argc, char* argv[]) {
             return EXIT_FAILURE;
         }
 
+        // Parse log level
         int level = atoi(argv[2]);
         if (level < LOG_DEBUG || level > LOG_FATAL) {
             fprintf(stderr, "Invalid log level. Use 0-4.\n");
             return EXIT_FAILURE;
         }
 
+        // Combine message arguments
         size_t message_len = 0;
-        for (int i = 3; i < argc; i++)
+        for (int i = 3; i < argc; i++) {
             message_len += strlen(argv[i]) + 1;
+        }
 
         char message[message_len];
         message[0] = '\0';
@@ -80,6 +85,7 @@ int main(int argc, char* argv[]) {
         return EXIT_SUCCESS;
     }
 
+    // Sanity check for dumpsys
     if (access("/system/bin/dumpsys", F_OK) != 0) {
         fprintf(stderr, "\033[31mFATAL ERROR:\033[0m /system/bin/dumpsys: inaccessible or not found\n");
         log_nusantara(LOG_FATAL, "/system/bin/dumpsys: inaccessible or not found");
@@ -94,71 +100,75 @@ int main(int argc, char* argv[]) {
         exit(EXIT_FAILURE);
     }
 
+    // Make sure only one instance is running
     if (create_lock_file() != 0) {
         fprintf(stderr, "\033[31mERROR:\033[0m Another instance of Nusantara Daemon is already running!\n");
         exit(EXIT_FAILURE);
     }
 
+    // Handle case when module modified by 3rd party
     is_kanged();
 
+    // Handle missing Gamelist
     if (access(GAMELIST, F_OK) != 0) {
         fprintf(stderr, "\033[31mFATAL ERROR:\033[0m Unable to access Gamelist, either has been removed or moved.\n");
         log_nusantara(LOG_FATAL, "Critical file not found (%s)", GAMELIST);
         exit(EXIT_FAILURE);
     }
 
+    // Daemonize service
     if (daemon(0, 0)) {
         log_nusantara(LOG_FATAL, "Unable to daemonize service");
         exit(EXIT_FAILURE);
     }
 
+    // Register signal handlers
     signal(SIGINT, sighandler);
     signal(SIGTERM, sighandler);
+
+    // Initialize variables
     bool need_profile_checkup = false;
     MLBBState mlbb_is_running = MLBB_NOT_RUNNING;
     ProfileMode cur_mode = PERFCOMMON;
-    log_nusantara(LOG_INFO, "Daemon started as PID %d", getpid());
-    run_profiler(PERFCOMMON);
 
-    int gamestart_poll_tick = 0;
+    log_nusantara(LOG_INFO, "Daemon started as PID %d", getpid());
+    run_profiler(PERFCOMMON); // exec perfcommon
 
     while (1) {
         sleep(LOOP_INTERVAL);
+
+        // Handle case when module gets updated
         if (access(MODULE_UPDATE, F_OK) == 0) [[clang::unlikely]] {
             log_nusantara(LOG_INFO, "Module update detected, exiting.");
             notify("Please reboot your device to complete module update.");
             break;
         }
 
-        /* GAME DETECTION LOGIC (DIPERBAIKI) */
-        gamestart_poll_tick++;
-        if (!gamestart || gamestart_poll_tick >= 2) {
-            char* new_game = get_gamestart();
-            gamestart_poll_tick = 0;
-            if (new_game && (!gamestart || strcmp(new_game, gamestart) != 0)) {
-                if (gamestart)
-                    free(gamestart);
-                gamestart = new_game;
-                need_profile_checkup = true;
-            } else if (new_game) {
-                free(new_game);
-            }
-        }
-        if (game_pid != 0 && kill(game_pid, 0) == -1) [[clang::unlikely]] {
+        // Only fetch gamestart when user not in-game
+        // prevent overhead from dumpsys commands.
+        if (!gamestart) {
+            gamestart = get_gamestart();
+        } else if (game_pid != 0 && kill(game_pid, 0) == -1) [[clang::unlikely]] {
             log_nusantara(LOG_INFO, "Game %s exited, resetting profile...", gamestart);
             game_pid = 0;
             free(gamestart);
-            gamestart = NULL;
+            gamestart = get_gamestart();
+
+            // Force profile recheck to make sure new game session get boosted
             need_profile_checkup = true;
         }
+
         if (gamestart)
             mlbb_is_running = handle_mlbb(gamestart);
 
-        /* PROFILE HANDLING */
         if (gamestart && get_screenstate() && mlbb_is_running != MLBB_RUN_BG) {
+            // Bail out if we already on performance profile
+            // However we will pass this if need_profile_checkup was true
             if (!need_profile_checkup && cur_mode == PERFORMANCE_PROFILE)
                 continue;
 
+            // Get PID and check if the game is "real" running program
+            // Handle weird behavior of MLBB
             game_pid = (mlbb_is_running == MLBB_RUNNING) ? mlbb_pid : pidof(gamestart);
             if (game_pid == 0) [[clang::unlikely]] {
                 log_nusantara(LOG_ERROR, "Unable to fetch PID of %s", gamestart);
@@ -175,6 +185,7 @@ int main(int argc, char* argv[]) {
             NusantaraPreload(gamestart);
             log_nusantara(LOG_INFO, "Applying performance profile for %s", gamestart);
         } else if (get_low_power_state()) {
+            // Bail out if we already on powersave profile
             if (cur_mode == POWERSAVE_PROFILE)
                 continue;
 
@@ -184,6 +195,7 @@ int main(int argc, char* argv[]) {
             run_profiler(POWERSAVE_PROFILE);
             log_nusantara(LOG_INFO, "Applying powersave profile");
         } else {
+            // Bail out if we already on normal profile
             if (cur_mode == NORMAL_PROFILE)
                 continue;
 
